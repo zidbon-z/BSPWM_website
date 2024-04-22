@@ -1,12 +1,18 @@
+import Bspwm from "./components/Bspwm";
+import { Home } from "./components/Home";
 import NavBar from "./components/NavBar";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
       <NavBar />
-      <main className="py-10 bg-zinc-900 text-white">
-        <h1>BSPWM for the masses!</h1>
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/bspwm" element={<Bspwm />} />
+        <Route />
+        <Route />
+      </Routes>
     </>
   );
 }

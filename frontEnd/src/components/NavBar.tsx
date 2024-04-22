@@ -2,12 +2,14 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import bspwm_sxhkd from "../assets/bspwm_sxhkd.svg";
+import { Link, NavLink } from "react-router-dom";
 
 const navigation = [
-  { name: "BSPWM", href: "#", current: true },
-  { name: "SXHKD", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "About", href: "#", current: false },
+  { name: "Home", to: "/", current: true },
+  { name: "BSPWM", to: "/bspwm", current: false },
+  { name: "SXHKD", to: "/sxhkd", current: false },
+  { name: "Projects", to: "/projects", current: false },
+  { name: "About", to: "/about", current: false },
 ];
 
 function classNames(...classes: string[]) {
@@ -44,19 +46,18 @@ export default function NavBar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <NavLink
                         key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium",
-                        )}
+                        to={item.to}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "bg-gray-900 text-white rounded-md py-2 px-3"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        }
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
