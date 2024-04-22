@@ -7,19 +7,21 @@ type SideBarItemProps = {
   isTitle: boolean;
 };
 
-type SideBarProps = SideBarItemProps[];
+type SideBarProps = {
+  sidelist: SideBarItemProps[];
+};
 
 const SideBar = ({ sidelist }: SideBarProps) => {
   const [visi, setVisi] = useState(true);
   return (
     <>
       <button
-        className="bg-white w-10 sm:w-0"
+        className="sm:hidden flex px-2 bg-red-500 border rounded border-green-500 w-auto sm:w-0"
         onClick={() => {
           visi ? setVisi(false) : setVisi(true);
         }}
       >
-        X
+        {visi ? "X" : "Open sidebar"}
       </button>
       <div
         id="default-sidebar"
