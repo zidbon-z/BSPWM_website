@@ -16,7 +16,7 @@ const SideBar = ({ sidelist }: SideBarProps) => {
   return (
     <>
       <button
-        className="sm:hidden flex px-2 bg-red-500 border rounded border-green-500 w-auto sm:w-0"
+        className="sm:hidden flex px-2 bg-gray-500 border rounded border-green-500 w-auto sm:w-0"
         onClick={() => {
           visi ? setVisi(false) : setVisi(true);
         }}
@@ -24,7 +24,6 @@ const SideBar = ({ sidelist }: SideBarProps) => {
         {visi ? "X" : "Open sidebar"}
       </button>
       <div
-        id="default-sidebar"
         className={
           visi
             ? " bg-black fixed left-0 z-40 w-64 h-screen transition-transform translate-x-0 sm:translate-x-0"
@@ -32,10 +31,9 @@ const SideBar = ({ sidelist }: SideBarProps) => {
         }
         aria-label="Sidebar"
       >
-        {sidelist.map(({ to, name, isTitle }: SideBarItemProps) =>
-          isTitle ? <SideBarItem to={to} name={name} isTitle={isTitle} /> : "",
-        )}
-        <SideBarItem to="/bspwm/test" name="EAt a DIck" isTitle={false} />
+        {sidelist.map(({ to, name, isTitle }: SideBarItemProps) => (
+          <SideBarItem to={to} name={name} isTitle={isTitle} />
+        ))}
       </div>
     </>
   );
