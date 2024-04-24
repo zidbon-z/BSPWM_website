@@ -1,4 +1,6 @@
+import { useState } from "react";
 import SideBar from "./SideBar";
+import { Outlet } from "react-router-dom";
 
 type SideBarItem = {
   name: string;
@@ -9,19 +11,34 @@ type SideBarItem = {
 const Bspwm = () => {
   const testSidebarProps3: SideBarItem[] = [
     { name: "Getting Started", to: "#", isTitle: true },
-    { name: "Installation", to: "/shit", isTitle: false },
-    { name: "Setup", to: "/dick", isTitle: false },
+    { name: "Installation", to: "installation", isTitle: false },
+    { name: "Setup", to: "setup", isTitle: false },
     { name: "Configuration", to: "/ass", isTitle: true },
     { name: "bspwmrc", to: "/dick", isTitle: false },
   ];
+
+  const [visi, setVisi] = useState(true);
+  const visiSetter = () => {
+    visi ? setVisi(false) : setVisi(true);
+  };
   return (
-    <div className="bg-black w-screen h-screen">
-      <div>
-        <SideBar sidelist={testSidebarProps3} />
-      </div>
-      <div className=" fixed bg-black sm:left-64 text-red-500">
-        <div>
-          <div className="">Bspwm</div>
+    <div className="grid grid-cols-[auto,_1fr] grid-rows-[auto,_1fr] bg-black w-screen h-screen">
+      <SideBar
+        sidelist={testSidebarProps3}
+        visi={visi}
+        visiSetter={visiSetter}
+      />
+      <div
+        className={
+          visi
+            ? " row-start-2 col-start-2 sm:col-start-2 bg-black sm:left-64 text-red-500"
+            : " row-start-2 col-start-1 col-span-2 sm:col-start-2 bg-black sm:left-64 text-red-500"
+        }
+      >
+        <div className="text-center">
+          <div>
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>
